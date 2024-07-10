@@ -19,22 +19,22 @@ class Account(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ('username', 'password', 'first_name',)
 
-    metadata = models.ForeignKey(
-        to="Metadata",
-        # author == User
-        related_name="author",
-        name="metadata",
-        null=False,
-        blank=False,
-        on_delete=models.CASCADE
-    )
-
     def __str__(self) -> str:
         return f"{self.email}"
 
 
 class Metadata(models.Model):
     name = models.CharField(name="name", editable=True, null=False, blank=False, max_length=64)
+
+    author = models.ForeignKey(
+        to="Account",
+        # author == User
+        related_name="metadata",
+        name="author",
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
 
 
 class Registry(Base):
