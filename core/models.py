@@ -38,7 +38,7 @@ class Metadata(models.Model):
 
 
 class Registry(Base):
-    name = models.CharField(name="name", editable=True, null=False, blank=False, max_length=64)
+    file = models.FileField(name="file", upload_to='videos/', editable=False, blank=False, null=True)
 
     metadata = models.OneToOneField(
         to="Metadata",
@@ -48,4 +48,3 @@ class Registry(Base):
         blank=False,
         on_delete=models.CASCADE
     )
-

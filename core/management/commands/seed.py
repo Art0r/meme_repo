@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand
 from django.contrib.auth.hashers import make_password
 from faker import Faker
 from core.models import Account, Registry, Metadata
-import random
 import os
 import subprocess
 
@@ -40,12 +39,3 @@ class Command(BaseCommand):
             is_staff=False,
             is_active=True
         )
-
-        registry = Registry.objects.create(
-            name=faker.user_name(),
-            metadata=Metadata.objects.create(
-                name=faker.user_name(),
-                author=account
-            )
-        )
-
